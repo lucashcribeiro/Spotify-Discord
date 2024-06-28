@@ -79,3 +79,21 @@ export const favoriteArtists = async (access_token: string) => {
     console.log(error);
   }
 };
+
+
+export const findArtist = async (access_token: string, id: string) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_SPOTIFY_URL}/artists/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+;}

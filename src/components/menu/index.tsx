@@ -40,21 +40,8 @@ export const Menu = ({ user, logoutFunction }: IMenu) => {
       </div>
       <div>
       </div>
-
-
-
       <p className="text-white">{user.display_name}</p>
-
-
-
-
       <button className="text-white active:text-green-500" onClick={() => logoutFunction()}>Logout</button>
-
-
-
     </div>
   );
 };
-
-
-
