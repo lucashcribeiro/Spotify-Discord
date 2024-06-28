@@ -6,7 +6,6 @@ import { favoriteArtists, newReleases } from "@/app/api/spotify/route";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-import { Player } from "react-player";
 
 interface IConteudo {
   title: string;
@@ -15,8 +14,14 @@ interface IConteudo {
 
 export const Conteudo = ({ title, page }: IConteudo) => {
   const [artists, setArtists] = useState<any>([]);
+  const [selectedArtist, setSelectedArtist] = useState<any>({});
+
+  console.log(selectedArtist);
 
   const accessToken = localStorage.getItem("spotify_access_token");
+  const moreInfomation = (artist: any) => {
+    setSelectedArtist(artist);
+  }
 
   useEffect(() => {
     async function loadData() {
@@ -41,17 +46,17 @@ export const Conteudo = ({ title, page }: IConteudo) => {
   }, [accessToken, page]);
 
   return (
-    <section>
+    <section className="bg-black">
       <h1>{title}</h1>
       <Swiper spaceBetween={50} slidesPerView={3}>
         {page === "lancamentos"
           ? artists.map((artist: any) => (
-            <SwiperSlide key={artist.id} className="bg-blue-500">
+            <SwiperSlide key={artist.id} className="bg-black text-white" onClick={() => moreInfomation(artist)}>
               <Image
                 src={artist.images[2].url}
                 alt="Nome da image"
-                width={250}
-                height={250}
+                width={1400}
+                height={1400}
                 className="w-[1200px] h-[600px] object-cover"
               />
               <p>{artist.name}</p>
@@ -59,19 +64,36 @@ export const Conteudo = ({ title, page }: IConteudo) => {
             </SwiperSlide>
           ))
           : artists.map((artist: any) => (
-            <SwiperSlide key={artist.id} className="bg-blue-500">
+            <SwiperSlide key={artist.id} className="bg-black text-white" onClick={() => moreInfomation(artist)}>
               <Image
-                src={artist.images[0].url}
+                src={artist.images[1].url}
                 alt="Nome da image"
-                width={100}
-                height={100}
+                width={1400}
+                height={1400}
                 className="w-[1200px] h-[600px] object-cover"
               />
+              <p className=" text-black">.</p>
               <p>{artist.name}</p>
               {/* <p>{artist.artists[0].name}</p> */}
             </SwiperSlide>
+
+
           ))}
       </Swiper>
+
+      {selectedArtist !== "" && (
+        <div className="absolute h-full w-full  flex justify-center items-center top-0 left-0 z-10 " >
+          <div className="bg-black bg-opacity-75 w-[600px] rounded-lg  h-[600px] border-solid border-4 border-green-500">
+            <h1>{selectedArtist.name}</h1>
+            {/* <h2>{selectedArtist?.artists[0].name}</h2> */}
+            <button onClick={() =>
+              setSelectedArtist({})
+            }>X</button>
+          </div>
+        </div>
+      )}
+
+
     </section>
   );
 };

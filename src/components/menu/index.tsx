@@ -15,7 +15,7 @@ export const Menu = ({ user, logoutFunction }: IMenu) => {
 
 
         <button
-          className="text-white active:text-green-500 focus:text-green-500"
+          className="text-white active:text-green-500 focus:text-green-500  "
           onClick={() => setIsOpen(!isOpen)}>
           Menu
         </button>
@@ -23,12 +23,12 @@ export const Menu = ({ user, logoutFunction }: IMenu) => {
           {isOpen && (
             <div className="absolute right-[0px] top-[20px] bg-green-500 rounded-xl flex justify-center items-center py-2 z-10">
               <ul className="flex gap-8 mx-16 flex-col w-100 max-h-32 items-center  ">
-                <li className="text-white active:text-green-500 focus:text-green-500">
+                <li className="text-black active:text-green-500 focus:text-white">
                   <Link href={"/lancamentos"}>
                     <button>Lançamentos</button>
                   </Link>
                 </li>
-                <li className="text-white active:text-green-500 focus:text-green-500">
+                <li className="text-black active:text-green-500 focus:text-white">
                   <Link href={"/artistas-preferidos"}>
                     <button>Artistas Preferidos</button>
                   </Link>
