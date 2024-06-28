@@ -8,7 +8,10 @@ import {
   newReleases,
 } from "@/app/api/spotify/route";
 import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css/navigation';
 import "swiper/css";
+import { Navigation } from "swiper/modules";
+
 
 interface IConteudo {
   title: string;
@@ -81,7 +84,7 @@ export const Conteudo = ({ title, page }: IConteudo) => {
   return (
     <section className="bg-black">
       <h1>{title}</h1>
-      <Swiper spaceBetween={50} slidesPerView={3}>
+      <Swiper spaceBetween={50} slidesPerView={3} navigation={true} modules={[Navigation]}>
         {page === "lancamentos"
           ? artists.map((artist: any) => (
             <SwiperSlide
@@ -149,7 +152,7 @@ export const Conteudo = ({ title, page }: IConteudo) => {
 
       {isOpen && page === "artistas-preferidos" && (
         <div className="absolute h-full w-full flex justify-center items-center top-0 left-0 z-10 ">
-          <div className="bg-black bg-opacity-75 relative w-[600px] rounded-lg  h-[600px] border-solid border-4 border-green-500 p-4">
+          <div className="bg-black bg-opacity-75 relative w-[400px] rounded-lg  h-[250px] border-solid border-4 border-green-500 p-4">
             <h1 className="text-white pb-2">
               Nome do Cantor - {artistInfo.name}
             </h1>
